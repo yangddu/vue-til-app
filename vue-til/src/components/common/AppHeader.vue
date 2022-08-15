@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div>header</div>
 </template>
 
@@ -6,4 +6,4 @@
 export default {};
 </script>
 
-<style lang=""></style>
+<style></style>

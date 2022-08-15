@@ -13,7 +13,7 @@ export default new VueRouter({
     },
     {
       path: '/signup',
-      component: SingupPage,
+      component: SignupPage,
     },
   ],
 });

@@ -1,0 +1,147 @@
+# Query: '
+
+263개 결과 - 16 파일
+
+vue-til/.eslintrc.js:
+  17:     "prettier/prettier": ["error", {
+  23:       trailingComma: "all",
+  25:       arrowParens: "avoid",
+
+vue-til/public/index.html:
+  12:       <strong>We"re sorry but <%= htmlWebpackPlugin.options.title %> doesn"t work properly without JavaScript enabled. Please enable it to continue.</strong>
+
+vue-til/src/App.vue:
+   2:   <img alt="Vue logo" src="./assets/logo.png" />
+   3:   <HelloWorld msg="Welcome to Your Vue.js App" />
+   7: import HelloWorld from "./components/HelloWorld.vue";
+  10:   name: "App",
+
+vue-til/src/components/HelloWorld.vue:
+    2:   <div class="hello">
+    7:       <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
+   15:           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
+   16:           target="_blank"
+   17:           rel="noopener"
+   23:           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
+   24:           target="_blank"
+   25:           rel="noopener"
+   31:           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-unit-jest"
+   32:           target="_blank"
+   33:           rel="noopener"
+   41:         <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
+   44:         <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
+   49:         <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
+   54:         <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
+   59:         <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
+   65:         <a href="https://router.vuejs.org" target="_blank" rel="noopener"
+   70:         <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
+   74:           href="https://github.com/vuejs/vue-devtools#vue-devtools"
+   75:           target="_blank"
+   76:           rel="noopener"
+   81:         <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener"
+   87:           href="https://github.com/vuejs/awesome-vue"
+   88:           target="_blank"
+   89:           rel="noopener"
+   99:   name: "HelloWorld",
+  106: <!-- Add "scoped" attribute to limit CSS to this component only -->
+
+vue-til-server/.eslintrc.js:
+   8:   parser: "babel-eslint",
+   9:   extends: ["prettier", "plugin:prettier/recommended"],
+  11:     "prettier/prettier": [
+  12:       "error",
+  18:         trailingComma: "all",
+  21:         arrowParens: "avoid",
+
+vue-til-server/README.md:
+  103:   mongoose.connect("여기다가 붙여넣으세요.", {
+
+vue-til-server/src/app.js:
+   2: import express from "express";
+   3: import cors from "cors";
+   4: import bodyParser from "body-parser";
+   5: import morgan from "morgan";
+   6: import mongoose from "mongoose";
+   7: import detectPort from "detect-port";
+   8: import chalk from "chalk";
+  11: import auth from "./api/auth.js";
+  12: import posts from "./api/posts.js";
+  13: import docs from "./utils/api-doc.js";
+  16: import { authenticateUser } from "./utils/auth.js";
+  20: db.on("error", console.error.bind(console, "MongoDB connection error:"));
+  22:   "mongodb+srv://test:1234@cluster0.xojnwuk.mongodb.net/?retryWrites=true&w=majority",
+  42: app.use(morgan("dev")); // log request
+  45: app.use("/", auth);
+  46: app.use("/posts", authenticateUser, posts);
+  49: app.use("/api", docs);
+  55:       .bgHex("#41b883")
+
+vue-til-server/src/api/auth.js:
+   2: import bcrypt from "bcrypt";
+   3: import { Router } from "express";
+   6: // import passport from "../passport.js";
+   7: import { newToken } from "../utils/auth.js";
+   8: import UserModel from "../models/UserModel.js";
+  14: router.post("/login", (req, res) => {
+  22:         res.status(401).send("Authentication failed. User not found.");
+  26:           res.status(500).send("Internal Server Error");
+  42:             message: "Login Success",
+  46:           res.status(401).json("Authentication failed. Wrong password.");
+  51:       res.status(500).json("Internal Server Error");
+  56: router.post("/signup", (req, res) => {
+
+vue-til-server/src/api/posts.js:
+    2: import { Router } from "express";
+    4: import PostModel from "../models/PostModel.js";
+    9: router.post("/", async (req, res) => {
+   19:       return res.status(400).send({ message: "Duplicated Data", error });
+   21:     res.status(400).send({ message: "sth wrong", error });
+   25: router.get("/", async (req, res) => {
+   38:     res.status(400).json({ message: "sth wrong", error });
+   42: router.get("/:id", async (req, res) => {
+   52:       return res.status(400).json({ message: "The data is not found" });
+   58:     res.status(400).json({ message: "sth wrong", error });
+   62: router.put("/:id", async (req, res) => {
+   76:       return res.status(400).json({ message: "cannot update the data" });
+   82:     res.status(400).json({ message: "sth wrong", error });
+   86: router.delete("/:id", async (req, res) => {
+   96:       return res.status(400).json({ message: "cannot remove the data" });
+  102:     res.status(500).json({ message: "sth wrong", error });
+
+vue-til-server/src/config/index.js:
+  1: export const SECRET_KEY = "vuex-with-token";
+  2: export const EXPIRATION_DATE = "100d";
+
+vue-til-server/src/models/PostModel.js:
+   1: import mongoose from "mongoose";
+  14:       ref: "Users",
+  22: const PostModel = mongoose.model("Posts", postSchema);
+
+vue-til-server/src/models/schemaOptions.js:
+  3:     createdAt: "created_at",
+
+vue-til-server/src/models/UserModel.js:
+   1: import mongoose from "mongoose";
+   2: import schemaOptions from "./schemaOptions";
+  23: const UserModel = mongoose.model("Users", userSchema);
+
+vue-til-server/src/utils/api-doc.js:
+  1: import swaggerUi from "swagger-ui-express";
+  2: import swaggerDocument from "./api-spec.json";
+  3: import { Router } from "express";
+  6: router.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  7: router.use("/api/v1", router);
+
+vue-til-server/src/utils/api-spec.json:
+  346:           "description": "User"s name"
+  350:           "description": "User"s password"
+  354:           "description": "User"s nickname"
+
+vue-til-server/src/utils/auth.js:
+   2: import jwt from "jsonwebtoken";
+   3: import { SECRET_KEY, EXPIRATION_DATE } from "../config";
+   5: import UserModel from "../models/UserModel.js";
+  28:     return res.status(401).json({ message: "token must be included" });
+  36:     return res.status(401).json({ message: "token is invalid" });
+  40:     .select("-password")
+  45:     return res.status(401).json({ message: "user is not found" });
